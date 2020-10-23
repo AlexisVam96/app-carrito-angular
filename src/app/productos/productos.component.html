@@ -1,0 +1,33 @@
+  <div class="my-2 text-left">
+    <button type="button" style="cursor: pointer;" [routerLink]="['/productos/form']" name="button" class="btn btn-success btn-rounded">Crear Producto</button>
+  </div>
+  <div class="alert alert-info" *ngIf="productos?.length==0">
+    No hay registro en la base de datos!
+  </div>
+  <div class="row">
+    <div class="col-sm-3" *ngFor="let producto of productos">
+      <div class="card mt-2" *ngIf="productos?.length>0">
+        <div class="row text-center">
+          <div class="col-sm-4">
+            <button type="button" [routerLink]="['/productos/detalle', producto.id]" class="btnn mt-2" ><i class="fas fa-camera"></i></button>
+          </div>
+          <div class="col-sm-4">
+            <button type="button" name="button" [routerLink]="['/productos/form', producto.id]" class="btnnn mt-2" style="border-radius:50%;"><i class="far fa-edit"></i></button>
+          </div>
+          <div class="col-sm-4">
+            <button type="button" name="button" (click)="delete(producto)" class="btnnnn mt-2"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+        <img *ngIf="producto?.imagen" class="mt-2 img-fluid" style="display: block; margin: auto;" src="http://localhost:8080/api/uploads/img/{{producto.imagen}}" >
+        <img *ngIf="!producto?.imagen" class="mt-2 img-fluid" style="display: block; margin: auto;" src="http://localhost:8080/images/not-available.png" alt="sin imagen" >
+
+        <div class="card-body">
+          <h5 class="card-title">{{producto.nombre}}</h5>
+
+          <p class="card-text" style="height:50px;">{{producto.descripcion}}</p>
+          <p class="card-text">S/{{producto.precio}}</p>
+          <p class="card-text">{{producto.stock}}</p>
+        </div>
+      </div>
+    </div>
+  </div>

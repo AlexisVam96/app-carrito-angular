@@ -1,0 +1,49 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+    {{ err }}
+  </li>
+</ul>
+
+<div class="card bg-default">
+  <div class="card-header">
+    <h3>{{titulo}}</h3 >
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="form-group-row">
+        <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="producto.nombre" name="nombre">
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="descripcion" class="col-form-label col-sm-2">Descripción</label>
+        <div class="col-sm-6">
+          <textarea name="descripcion" class="form-control" [(ngModel)]="producto.descripcion" cols="80"></textarea>
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="precio" class="col-form-label col-sm-2">Precio</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="producto.precio" name="precio">
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="stock" class="col-form-label col-sm-2">Stock</label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="producto.stock" name="stock">
+        </div>
+      </div>
+
+      <div class="form-group-row mt-3">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!producto.id else elseBlock">Crear</button>
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" role="button" (click)="update()">Editar</button>
+          </ng-template>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">Detalle del producto</div>
+  <div class="card-body ">
+
+    <div class="row">
+      <div class="col-sm form-group">
+        <ul *ngIf="producto" class="list-group">
+          <li class="list-group-item active">{{producto.nombre}}</li>
+          <li class="list-group-item">{{producto.descripcion}}</li>
+          <li class="list-group-item">{{producto.precio}}</li>
+          <li class="list-group-item">{{producto.stock}}</li>
+        </ul>
+
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>File</span>
+            <input (change)="seleccionarFoto($event)" type="file" multiple>
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Seleccionar imagen">
+          </div>
+        </div>
+        <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button">Subir</button>
+      </div>
+      <div class="col-sm text-center">
+        <img *ngIf="!producto?.imagen" src="http://localhost:8080/images/not-available.png" alt="producto.imagen" class="rounded img-fluid" width="300" height="300">
+        <img *ngIf="producto?.imagen" src="http://localhost:8080/api/uploads/img/{{producto.imagen}}" alt="producto.imagen" class="rounded img-fluid" width="300" height="300">
+        <div *ngIf="progreso > 0" class="progress" style="height:5px;">
+             <div class="determinate"  [ngStyle]="{width: progreso+'%'}"></div>
+         </div>
+      </div>
+    </div>
+
+  </div>
+</div>
