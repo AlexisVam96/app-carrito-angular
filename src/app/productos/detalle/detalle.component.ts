@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Producto} from '../producto'
 import { ProductoService} from '../producto.service'
-import { ActivatedRoute} from '@angular/router'
+import { ModalService } from './modal.service'
 import swal from 'sweetalert2'
 import { HttpEventType} from '@angular/common/http'
+
 
 @Component({
   selector: 'detalle-producto',
@@ -12,24 +13,16 @@ import { HttpEventType} from '@angular/common/http'
 })
 export class DetalleComponent implements OnInit {
 
-  producto: Producto
+  @Input() producto: Producto
+
   titulo: string = "Detalle del producto"
   public fotoSeleccionada: File
   public progreso: number = 0
 
   constructor(private productoService: ProductoService,
-    private activatedRoute: ActivatedRoute) { }
+    public modalService: ModalService) { }
 
   ngOnInit(): void {
-
-    this.activatedRoute.paramMap.subscribe(params =>{
-      let id: number = +params.get('id')
-      if(id){
-        this.productoService.getProducto(id).subscribe( producto => {
-          this.producto = producto
-        })
-      }
-    })
 
   }
   seleccionarFoto(event){
@@ -66,4 +59,9 @@ export class DetalleComponent implements OnInit {
 
   }
 
+  cerrarModal(){
+    this.modalService.cerrarModal();
+    this.fotoSeleccionada = null;
+    this.progreso = 0;
+  }
 }

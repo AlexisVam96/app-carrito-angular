@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Producto} from './producto';
 import { ProductoService} from './producto.service';
+import { ModalService} from './detalle/modal.service'
 import swal from 'sweetalert2'
 
 
@@ -12,8 +13,10 @@ import swal from 'sweetalert2'
 export class ProductosComponent implements OnInit {
 
   productos: Producto[];
+  productoSeleccionado: Producto
 
-  constructor(private productoService: ProductoService) { }
+  constructor(private productoService: ProductoService,
+            private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.productoService.getProductos().subscribe(
@@ -56,4 +59,8 @@ export class ProductosComponent implements OnInit {
     })
   }
 
+  abrirModal(producto: Producto){
+    this.productoSeleccionado = producto
+    this.modalService.abrirModal()
+  }
 }

@@ -16,8 +16,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/productos', pathMatch: 'full'},
   {path: 'productos', component: ProductosComponent},
   {path: 'productos/form', component: FormComponent},
-  {path: 'productos/form/:id', component: FormComponent},
-  {path: 'productos/detalle/:id', component: DetalleComponent},
+  {path: 'productos/form/:id', component: FormComponent}
 ];
 
 @NgModule({
