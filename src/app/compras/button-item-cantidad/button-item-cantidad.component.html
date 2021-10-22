@@ -1,0 +1,21 @@
+<div class="py-2" *ngIf="!carritoService.existeItem(producto.id)">
+  <button  class="btn btn-success btn-block" type="button" (click)="addToList(producto)">Agregar al carrito</button>
+</div>
+<div class="col py-2" *ngIf="carritoService.existeItem(producto.id)">
+  <div class="row" >
+    <div class="col-4 display-center">
+      <button [disabled]="carritoService.getCantidadItem(producto.id)==1"  (click)="carritoService.disminuirCantidad(producto.id, carritoService.getCantidadItem(producto.id))" class="btn  btn-border btn-cantidad" type="button">
+        <span class="fas fa-minus"></span>
+      </button>
+    </div>
+    <div class=" col-4 display-center label--4" >
+      {{carritoService.getCantidadItem(producto.id)}}
+    </div>
+    <div class="col-4 display-center">
+      <button (click)="carritoService.incrementaCantidad(producto.id)"  class="btn btn-border btn-cantidad " type="button" >
+        <span class="fas fa-plus"></span>
+      </button>
+    </div>
+  </div>
+
+</div>

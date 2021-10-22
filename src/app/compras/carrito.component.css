@@ -1,0 +1,61 @@
+.display-center{
+  display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+    margin: 0;
+    padding:0;
+}
+
+.display-horizontal-end{
+  display: flex;
+
+    justify-content: flex-end;
+}
+
+.card-shadow{
+  box-shadow: 0 4px 20px rgb(51 51 51 / 10%);
+}
+
+.text-title-car{
+  font-size: .835rem!important;
+  font-weight: 700;
+  color: #737373;
+  overflow: hidden;
+}
+
+.text-car{
+  font-size: .835rem!important;
+  font-weight: 400;
+  color: #737373;
+  overflow: hidden;
+
+}
+
+@media (max-width: 770px){
+  .card-responsive{
+    margin-bottom: 230px!important;
+  }
+}
+
+
+@media (max-width: 570px){
+  .text-car {
+    font-size: 1rem!important;
+    font-style: normal!important;
+    font-weight: 400!important;
+    line-height: 120%!important
+  }
+}
+
+.btn-delete{
+  color: #e74848;
+  box-shadow: none;
+  text-decoration: none;
+  font-size: .88875rem!important;
+  font-style: normal!important;
+  font-weight: 600!important;
+  line-height: 100%!important;
+}
+

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Producto} from './producto'
+import {Categoria} from '../categoria/categoria'
 import {ProductoService} from './producto.service'
+import {CategoriaService} from '../categoria/categoria.service'
 import { Router, ActivatedRoute} from '@angular/router'
 import swal from 'sweetalert2'
 
@@ -12,15 +14,18 @@ import swal from 'sweetalert2'
 export class FormComponent implements OnInit {
 
   public producto: Producto = new Producto()
+  public categorias: Categoria[]
   public titulo: string = "Crear Producto"
   public errores: string[]
 
   constructor(private productoService: ProductoService,
+    private categoriaService: CategoriaService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.cargarCliente()
+    this.cargarCliente();
+
   }
 
   public cargarCliente(): void{
@@ -31,7 +36,8 @@ export class FormComponent implements OnInit {
           producto => this.producto = producto
         )
       }
-    })
+    });
+    this.categoriaService.getCategorias().subscribe(categorias => this.categorias = categorias)
   }
 
   public create(): void{
@@ -64,5 +70,12 @@ export class FormComponent implements OnInit {
     )
   }
 
+  comprararCategoria(o1: Categoria, o2: Categoria): boolean{
+    if( o1 === undefined && o2 === undefined){
+      return true;
+    }
+    return o1===null || o2===null || o1===undefined || o2===undefined ? false : o1.id===o2.id;
+
+  }
 
 }

@@ -1,59 +1,16 @@
-.btnn {
-  background-color:white;
-  color: grey;
-  height: 30px;
-  width: 30px;
-  margin: auto;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  text-decoration: none;
+
+.heading{
+
+  font-size: 1.42375rem!important;
+  font-style: normal!important;
+  font-weight: 500!important;
+  line-height: 120%!important;
+
 }
 
-.btnn:hover {
-  background-color: grey;
-  color: white;
-  height: 40px;
-  width: 40px;
-  border:none;
-}
+@media only screen and  (max-width: 500px) {
+  .heading{
+    font-size: 1.245625rem!important;
 
-.btnnn {
-  background-color:white;
-  color: gold;
-  height: 30px;
-  width: 30px;
-  margin: auto;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  text-decoration:none;
-}
-
-.btnnn:hover {
-  background-color: gold;
-  color: white;
-  height: 40px;
-  width: 40px;
-  border:none;
-}
-
-.btnnnn {
-  background-color:white;
-  color: red;
-  height: 30px;
-  width: 30px;
-  margin: auto;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  text-decoration:none;
-}
-
-.btnnnn:hover {
-  background-color: red;
-  color: white;
-  height: 40px;
-  width: 40px;
-  border:none;
+  }
 }

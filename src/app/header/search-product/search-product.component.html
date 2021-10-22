@@ -1,0 +1,26 @@
+<form class="example-form" matAutocompleteOrigin #origin="matAutocompleteOrigin">
+  <div class="col" style="padding-right: 0;">
+    <div class="example-full-width no-line">
+      <div class="row" style="margin-right: 0px;">
+        <input type="text"
+            class="search col-11"
+            style="border-radius: 5px 0 0 5px;"
+            aria-label="Productos"
+            placeholder="buscar producto o marca"
+            matInput
+            [formControl]="autocompleteControl"
+            [matAutocomplete]="auto"
+            [matAutocompleteConnectedTo]="origin" >
+            <div class="col-1" style="padding-left: 0; height: 43px; padding-right: 0;">
+              <div class="input-group-text icon-search" ><i class="fas fa-search"></i></div>
+            </div>
+      </div>
+
+      <mat-autocomplete   #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarProducto($event)">
+        <mat-option style="width: 100%;" *ngFor="let producto of productosFiltrados | async" [value]="producto" [routerLink]="['/producto', producto.nombre]" style="font-size: small;">
+          {{producto.nombre}}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </div>
+</form>

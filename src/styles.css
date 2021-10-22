@@ -1,9 +1,131 @@
 /* You can add global styles to this file, and also import other style files */
-html{
-  position:relative;
-  min-height: 100%;
+
+@import '~swiper/swiper-bundle';
+
+.mat-drawer-container{
+  z-index: 10!important;
+  display: unset!important;
+}
+.mat-badge {
+  margin-top: 7px;
 }
 
+.container {
+  max-width: 1240px!important;
+}
+
+
 body{
-  margin-bottom: 60px;
+  margin: 0!important;
+  padding: 0;
+  background-color: #f6f6f6!important;
+  height: 100%;
+}
+
+.swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
+  display: none;
+}
+
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 1rem!important;
+  }
+}
+.map-modal .mat-dialog-container{
+  border-radius: 0!important;
+  height: 100%;
+  display: block!important;
+}
+
+.login-modal .mat-dialog-container{
+  border-radius: 0!important;
+
+}
+
+
+
+.input:focus{
+  border: 1px solid #16a2ff;
+  outline: none;
+}
+.input{
+  border: 1px solid #d9d9d9;
+  height: 40px;
+  width: 100%;
+  border-radius: 4px;
+  padding: 11px 8px;
+  line-height: 18px;
+  box-sizing: border-box;
+  display: inline-flex;
+
+
+}
+
+body::-webkit-scrollbar {
+  width: 0.8em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn{
+  cursor: pointer!important;
+  border-radius: 999px!important;
+  padding: 10px 15px!important;
+  border: solid transparent;
+  font-weight: 500!important;
+
+}
+
+.card{
+  border:none!important;
+  border-radius: 10px!important;
+}
+
+.card-header{
+  background: none!important;
+}
+
+.btn:disabled{
+  background: #f2f2f2!important;
+  color: #d9d9d9!important;
+  border-color: #f2f2f2!important;
+  font-weight: 500!important;
+  font-size: 1rem!important;
+}
+
+.btn-border{
+  border: 1px solid #f2f2f2
+}
+
+.btn-success{
+  background-color: #1b8f43!important;
+  border-color: #1b8b29!important;
+
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+   height: auto;
+}
+
+.label-black{
+  font-size: 1rem!important;
+    font-style: normal!important;
+    font-weight: 500!important;
+    line-height: 100%!important;
+}
+
+
+.mat-autocomplete-panel.mat-autocomplete-visible {
+  overflow: hidden;
 }

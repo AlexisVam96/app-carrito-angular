@@ -1,0 +1,19 @@
+<ngb-carousel class="d-none d-md-block" *ngIf="sliders" style="z-index: 1;" >
+  <ng-template  ngbSlide *ngFor="let slider of sliders">
+    <div class="picsum-img-wrapper " >
+      <img src="{{slider.img}}" class="w-100 img-fluid img-res "  alt="Random first slide">
+    </div>
+
+  </ng-template>
+
+</ngb-carousel>
+
+<ngb-carousel class="d-block d-md-none"  *ngIf="sliders_cuadrados" style="z-index: 1;" >
+  <ng-template  ngbSlide *ngFor="let slider of sliders_cuadrados">
+    <div class="picsum-img-wrapper " >
+      <img src="{{slider.img}}" class="w-100 img-fluid img-res "  alt="Random first slide">
+    </div>
+
+  </ng-template>
+
+</ngb-carousel>

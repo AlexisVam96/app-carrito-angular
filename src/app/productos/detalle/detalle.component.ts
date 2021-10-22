@@ -4,6 +4,8 @@ import { ProductoService} from '../producto.service'
 import { ModalService } from './modal.service'
 import swal from 'sweetalert2'
 import { HttpEventType} from '@angular/common/http'
+import {AuthService} from '../../usuarios/auth.service'
+import { URL_BACKEND } from 'src/app/config/config';
 
 
 @Component({
@@ -18,9 +20,11 @@ export class DetalleComponent implements OnInit {
   titulo: string = "Detalle del producto"
   public fotoSeleccionada: File
   public progreso: number = 0
+  urlBackend: string = URL_BACKEND
 
   constructor(private productoService: ProductoService,
-    public modalService: ModalService) { }
+    public modalService: ModalService,
+    public authService: AuthService) { }
 
   ngOnInit(): void {
 
@@ -47,6 +51,10 @@ export class DetalleComponent implements OnInit {
         }else if(event.type === HttpEventType.Response){
           let response: any = event.body
           this.producto = response.producto as Producto
+
+          console.log(response.producto)
+
+          this.modalService.notificarUpload.emit(this.producto);
           swal.fire(
             'La foto se ha subido completamente',
             response.mensaje,

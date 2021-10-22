@@ -1,0 +1,20 @@
+.btn-cantidad{
+  border-radius: 50%!important;
+  border-color: #d9d9d9;
+}
+
+.btn-cantidad:hover{
+  background-color: rgba(0, 0, 0, .08);
+}
+
+
+.display-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label--4{
+  font-size: 1.2rem;
+  font-weight: 600;
+}

@@ -1,0 +1,47 @@
+<div class="card mt-5 ">
+  <div class="card-body">
+    <h4 class="card-title">
+      <a class="btn btn-secondary btn-sm" [routerLink]="['/productos']" >&laquo; volver</a>
+    </h4>
+
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">DATOS</th>
+          <th scope="col">DNI</th>
+          <th scope="col">MOVIL</th>
+          <th scope="col">DIRECCION</th>
+          <th scope="col">TIPO DE PAGO</th>
+          <th scope="col">FECHA</th>
+          <th scope="col">TOTAL</th>
+          <th scope="col">ACCION</th>
+          <th scope="col">ELIMINAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let compra of compras">
+          <th scope="row">{{compra.id}}</th>
+          <td>{{compra.nombre}} {{compra.apellido}}</td>
+          <td>{{compra.dni}}</td>
+          <td>{{compra.movil}}</td>
+          <td>{{compra.direccion}}</td>
+          <td>{{compra.pago}}</td>
+          <td>{{compra.fecha}}</td>
+          <td>{{compra.total}}</td>
+          <td>
+            <button type="button" class="btn btn-link" [routerLink]="['/compras',compra.id]"  >
+            detalle
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-link" style="color: red;" (click)="delete(compra)"  >
+            eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

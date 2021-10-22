@@ -1,0 +1,49 @@
+<mat-sidenav-container class="sidenav-container d-lg-none d-md-block">
+  <mat-sidenav  position="start" #drawer class="sidenav " fixedInViewport>
+    <div class="list-control list-control-align">
+      <div class="list-control-text">
+        <mat-toolbar>Menú</mat-toolbar>
+      </div>
+      <div class="list-control-close" >
+        <span style="cursor: pointer; " (click)="drawer.toggle()"><i class="fas fa-times" ></i></span>
+      </div>
+    </div>
+    <mat-nav-list>
+      <a *ngIf="!carritoService.existeDireccion()"  mat-list-item (click)=" openDialogMaps();" style="border-bottom: 1px solid #f2f2f2!important;">
+        Ingresar ubicación
+      </a>
+      <a *ngIf="carritoService.existeDireccion()"  mat-list-item (click)=" openDialogMaps();" style="border-bottom: 1px solid #f2f2f2!important;">
+        {{carritoService.ubicacion}}
+      </a>
+      <mat-toolbar class="list-control" style="border-bottom: 1px solid #f2f2f2!important;">Categorías</mat-toolbar>
+
+      <a *ngFor="let categoria of categorias" mat-list-item (click)="drawer.toggle()" style="border-bottom: 1px solid #f2f2f2!important;" [routerLink]="['/categoria',categoria.nombre]" >{{categoria.nombre}}</a>
+
+      <mat-toolbar class="list-control" *ngIf="authService.isAuthenticated()" style="border-bottom: 1px solid #f2f2f2!important;" >
+        {{authService.usuario.nombre}} {{authService.usuario.apellido}}
+      </mat-toolbar>
+
+      <a *ngIf="authService.isAuthenticated()" mat-list-item (click)="drawer.toggle()" [routerLink]="['/mis-compras',authService.usuario.username]" style="border-bottom: 1px solid #f2f2f2!important;">
+        Mis compras
+      </a>
+
+      <a *ngIf="authService.isAuthenticated()" mat-list-item (click)="logout(); drawer.toggle();" style="border-bottom: 1px solid #f2f2f2!important;">
+       Cerrar sesión
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

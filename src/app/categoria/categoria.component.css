@@ -1,0 +1,17 @@
+.btnnnn {
+  background-color:white;
+  color: red;
+  height: 30px;
+  width: 30px;
+  margin: auto;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  text-decoration:none;
+  transition: transform 1s;
+
+}
+
+.btnnnn:hover {
+  transform: scale(1.5);
+}

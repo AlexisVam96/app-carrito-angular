@@ -1,0 +1,41 @@
+<mat-sidenav-container  class="sidenav-container d-lg-none d-md-block">
+  <mat-sidenav position="end" #drawer class="sidenav " fixedInViewport>
+    <mat-toolbar  matAutocompleteOrigin #origin="matAutocompleteOrigin" class="search-container" style=" box-shadow: 1px 1px 2px 0 rgb(0 0 0 / 20%);">
+
+        <label class="m-0 " style="display: inline-block;" (click)="drawer.toggle();"  >
+          <i class="fas fa-arrow-left"></i>
+        </label>
+        <input
+        matInput
+        [formControl]="autocompleteControl"
+        [matAutocomplete]="auto"
+        [matAutocompleteConnectedTo]="origin" class="input-container" type="text" placeholder="buscar producto">
+
+
+    </mat-toolbar>
+    <!--content sidenav-->
+    <mat-nav-list >
+      <mat-autocomplete  #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarProducto($event)">
+        <mat-option  *ngFor="let producto of productosFiltrados | async" [value]="producto" [routerLink]="['/producto', producto.nombre]" style="font-size: small;">
+          <a  mat-list-item (click)="drawer.toggle()" style="color: black; border-bottom: 1px solid #f2f2f2!important;"  >{{producto.nombre}}</a>
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <!--button-->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        >
+        <mat-icon aria-label="Side nav toggle icon">search</mat-icon>
+      </button>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

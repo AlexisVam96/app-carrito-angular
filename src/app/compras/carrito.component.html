@@ -1,0 +1,91 @@
+<app-header [car]="false"></app-header>
+
+ <div class="mt-5 container">
+
+   <div class="card m-auto  p-3 justify-content-center align-items-center" style="border: none; max-width: 450px; " *ngIf="carritoService.cantidad == 0">
+    <img src="../../favicon.ico" alt="" width="80px" height="80px">
+    <span class="mb-3" style="font-weight: 500;">Tú carrito está vacío</span>
+    <div class="mb-5 text-muted" style="text-align: center;">Agrega productos y da el primer paso para iniciar tu compra</div>
+
+    <button class="btn btn-success  m-auto px-5" style="border-radius: 20px;" routerLink="/productos" type="submit">Ir a la página principal</button>
+   </div>
+   <form action="" *ngIf="carritoService.cantidad > 0">
+      <div class="row" style="overflow: hidden;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-8" style="overflow: auto;"  >
+          <div class="card mb-3 card-responsive" style="position: relative; ">
+            <div class="card-body">
+              <h5 class="mx-2 font-weight-bold">{{titulo}}</h5>
+            <div class="dropdown-divider"></div>
+            <div class="row text-title-car">
+              <div class="col-sm-4 ">
+                <span class="text-tag text-dark-gray">PRODUCTOS</span>
+              </div>
+              <div class="col-sm-2 d-sm-block d-none">
+                <span class="text-tag text-dark-gray">PRECIO</span>
+              </div>
+              <div class="col-sm-2 d-sm-block d-none">
+                <span class="text-tag text-dark-gray">CANTIDAD</span>
+              </div>
+              <div class="col-sm-2 d-sm-block d-none">
+                <span class="text-tag text-dark-gray">SUBTOTAL</span>
+              </div>
+
+            </div>
+            <div class="dropdown-divider"></div>
+            <app-listar-carrito></app-listar-carrito>
+          </div>
+        </div>
+
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="card mb-3 d-none d-md-block">
+            <div class="card-body">
+              <div class="card-title " style="font-weight: 500;">Resumen de compra</div>
+              <div class="dropdown-divider"></div>
+              <div class="row">
+                <div class="col-sm">
+                  <p class="text-left mb-1">Subtotal:</p>
+                </div>
+                <div class="col-sm">
+                  <p class="text-right mb-1">{{calcularGranTotal() | currency : 'S/'}}</p>
+                </div>
+              </div>
+            <div class="dropdown-divider"></div>
+              <div class="row " style="font-weight: 500;">
+                <div class="col-sm">
+                  <p class="text-left">Total a pagar:</p>
+                </div>
+                <div class="col-sm">
+                  <p class="text-right">{{calcularGranTotal() | currency : 'S/'}}</p>
+                </div>
+              </div>
+              <button class="btn btn-success btn-block btn-social" (click)="routerCompra()"  type="button">Ir a comprar</button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="card card-shadow d-block d-md-none" style=" height: 220px; position: fixed; left: 0; right: 0; bottom: 0;">
+        <div class="card-body">
+          <div class="card-title " style="font-weight: 500;">Resumen de compra</div>
+          <div class="dropdown-divider"></div>
+          <div class="row">
+            <div class="col">Subtotal:</div>
+            <div class="col text-right ">{{calcularGranTotal() | currency : 'S/'}}</div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div class="row " style="font-weight: 500;">
+            <div class="col" >Total a pagar:</div>
+            <div class="col text-right">{{calcularGranTotal() | currency : 'S/'}}</div>
+          </div>
+
+          <button class="btn btn-success btn-block btn-social mt-3" (click)="routerCompra();"  type="button">Ir a comprar</button>
+
+        </div>
+      </div>
+    </form>
+</div>
+
+

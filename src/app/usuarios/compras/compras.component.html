@@ -1,0 +1,57 @@
+<app-header></app-header>
+<section class="mt-4">
+  <main class="container">
+    <div class="jumbotron " style="margin-top: 40px;" *ngIf="usuario.compras.length == 0">
+      <h1 class="display-4">Hola {{usuario.nombre}}!</h1>
+      <p class="lead">Todavía no haz realizado ninguna compra? Que esperas en comprar? En YOUSTORE tenemos
+        variedades de productos para todas las necesidades
+      </p>
+      <hr class="my-4">
+      <p>Que tenga buen día y disfrute de nuestra aplicación con los mejores productos.</p>
+      <a class="btn btn-success btn-lg" routerLink="/productos" role="button">Ir a la pagina principal</a>
+    </div>
+
+    <div class="card col-sm-10">
+      <table class="table table-responsive mt-5" *ngIf="usuario.compras.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">DATOS</th>
+            <th scope="col">DNI</th>
+            <th scope="col">MOVIL</th>
+            <th scope="col">DIRECCION</th>
+            <th scope="col">MONTO PARA CANCELAR</th>
+            <th scope="col">FECHA</th>
+            <th scope="col">TOTAL</th>
+            <th scope="col">ACCION</th>
+            <th scope="col">ELIMINAR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let compra of usuario.compras">
+            <th scope="row">{{compra.id}}</th>
+            <td>{{usuario.nombre}} {{usuario.apellido}}</td>
+            <td>{{compra.dni}}</td>
+            <td>{{compra.movil}}</td>
+            <td>{{compra.direccion}}</td>
+            <td>S/ {{compra.monto}}.00</td>
+            <td>{{compra.fecha}}</td>
+            <td>S/ {{compra.total}}.00</td>
+            <td>
+              <button type="button" class="btn btn-link" [routerLink]="['/compras',compra.id]"  >
+              detalle
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" style="color: red;" (click)="delete(compra)"  >
+                eliminar
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</section>
+
+
