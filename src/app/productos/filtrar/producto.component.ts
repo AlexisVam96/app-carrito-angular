@@ -3,6 +3,7 @@ import { Router, ActivatedRoute} from '@angular/router'
 import {Producto} from '../producto';
 import {ProductoService} from '../producto.service';
 import {CarritoService} from '../../compras/carrito.service';
+import { URL_BACKEND } from 'src/app/config/config';
 
 @Component({
   selector: 'app-producto',
@@ -12,6 +13,7 @@ import {CarritoService} from '../../compras/carrito.service';
 export class ProductoComponent implements OnInit {
 
   producto : Producto;
+  urlBackend: string = URL_BACKEND;
 
   constructor(private productoService: ProductoService,
     private activatedRoute: ActivatedRoute,

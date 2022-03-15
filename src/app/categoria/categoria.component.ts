@@ -108,6 +108,8 @@ export class CategoriaComponent implements OnInit {
             )
           }
         )
+
+        this.router.navigate(['/categorias/form'])
       }
     })
   }

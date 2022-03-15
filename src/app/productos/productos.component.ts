@@ -70,11 +70,12 @@ export class ProductosComponent implements OnInit {
 
     this.productoService.getProductos().subscribe( productos =>{
       this.productos = productos;
-      console.log(this.productos)
+      console.log('productos.component: ',this.productos)
     })
 
     this.categoriaService.getCategorias().subscribe(categorias =>{
       this.categorias = categorias
+      console.log('productos.component: ',this.categorias)
     })
 
 
@@ -88,38 +89,6 @@ export class ProductosComponent implements OnInit {
     })
   }
 
-  delete(producto: Producto): void{
-    const swalWithBootstrapButtons = swal.mixin({
-      customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    })
 
-    swalWithBootstrapButtons.fire({
-      title: 'Esta seguro?',
-      text: `¿Seguro que desea eliminar el producto ${producto.nombre} - ${producto.descripcion}`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si, eliminar!',
-      cancelButtonText: 'No, cancelar!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        this.productoService.delete(producto.id).subscribe(
-          _response => {
-            this.productos = this.productos.filter(pro => pro !== producto)
-            swalWithBootstrapButtons.fire(
-              'Producto Eliminado!',
-              `Producto ${producto.nombre} elimando con éxito!`,
-              'success'
-            )
-          }
-        )
-      }
-    })
-  }
 
 }

@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { CommonModule } from '@angular/common';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent} from './header/header.component';
 import { ProductosComponent } from './productos/productos.component';
@@ -62,12 +64,21 @@ import { SearchProductComponent } from './header/search-product/search-product.c
 import { SearchNavComponent } from './search-nav/search-nav.component';
 import { ButtonItemCantidadComponent } from './compras/button-item-cantidad/button-item-cantidad.component';
 import { ListarProductoComponent } from './productos/listar-producto/listar-producto.component';
+import { SaveProductComponent } from './productos/save-product/save-product.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgxStripeModule } from 'ngx-stripe';
+import { ProductosUsuariosComponent } from './productos/productos-usuarios/productos-usuarios.component';
+
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/productos', pathMatch: 'full'},
   {path: 'productos', component: ProductosComponent},
+  {path: 'productos/save', component: SaveProductComponent, canActivate:[AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
+  {path: 'productos/save/:id', component: SaveProductComponent, canActivate:[AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
+  {path: 'productos/usuario/:user', component: ProductosUsuariosComponent},
   {path: 'productos/page/:page', component: ProductosComponent},
-  {path: 'productos/form', component: FormComponent,canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'productos/form', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'productos/form/:id', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'categorias/form', component: CategoriaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'categorias/form/:id', component: CategoriaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
@@ -76,11 +87,11 @@ const routes: Routes = [
   {path: 'compras/:id', component: ItemComponent , canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
   {path: 'carrito', component: CarritoComponent},
   {path: 'checkout', component: CkeckoutComponent},
-  {path: 'checkout/:user', component: CkeckoutComponent},
+  {path: 'checkout/:user', component: CkeckoutComponent, canActivate:[AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}},
   {path: 'producto/:nombre', component: ProductoComponent},
   {path: 'categoria/:nombre', component: ProductComponent},
   {path: 'registro', component: RegistroComponent},
-  {path: 'mis-compras/:user', component: ComprasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}}
+  {path: 'mis-compras/:user', component: ComprasComponent, canActivate:[AuthGuard, RoleGuard], data: {role: 'ROLE_USER'}}
 ];
 
 @NgModule({
@@ -110,12 +121,15 @@ const routes: Routes = [
     SearchNavComponent,
     ButtonItemCantidadComponent,
     ListarProductoComponent,
+    SaveProductComponent,
+    ProductosUsuariosComponent
   ],
   entryComponents: [
     MapsComponent,
     LoginComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
@@ -143,7 +157,10 @@ const routes: Routes = [
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+    NgxDropzoneModule,
+    ReactiveFormsModule,
+    NgxStripeModule.forRoot('pk_test_51JVKQZLxrHzzhEPxCqdeoG77DA2cCpta5fS66V0FGZ66neDHS87AgiG1OGKUsoFaaSQWLdXleNHWfoRNGWPn4hxe00S0eu45Cu'),
   ],
   providers: [
     ProductoService,

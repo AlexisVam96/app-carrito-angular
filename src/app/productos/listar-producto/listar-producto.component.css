@@ -5,6 +5,7 @@
 }
 
 
+
 .swiper-button-next {
   z-index: 2;
   right: 0px;
@@ -15,7 +16,6 @@
   width: 100% !important;
     margin: 0 5px 10px;
     font-size: .614375rem!important;
-    color: #b2b2b2;
     font-style: normal!important;
     font-weight: 700!important;
     line-height: 100%!important;
@@ -24,7 +24,7 @@
 
 .product-name {
   max-height: 34px !important;
-  height: 34px !important;
+  /*height: 34px !important;*/
   padding: 0;
   margin: 5px 0 5px 5px;
   font-size: .875rem!important;
@@ -40,10 +40,11 @@
 }
 
 .price-content {
-  margin: 18px 5px 5px;
+  margin: 5px 5px 5px;
   padding: 0;
   width: 100%;
   box-sizing: border-box;
+  color: goldenrod;
 }
 
 .product-title{
@@ -64,4 +65,41 @@
 .swiper-button-prev {
   z-index: 2;
   left: 0px;
+}
+
+.swiper-slide {
+  width: 80%;
+}
+
+
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #000;
+  opacity: 0.2;
+  margin: 0 8px!important;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: cornflowerblue;
+}
+
+
+
+
+
+.card-button:hover{
+  opacity: 1;
+}
+
+.card-button{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - 32px);
+  transform: translate(-50%,-50%);
+  opacity: 0;
 }

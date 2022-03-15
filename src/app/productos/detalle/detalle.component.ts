@@ -6,6 +6,7 @@ import swal from 'sweetalert2'
 import { HttpEventType} from '@angular/common/http'
 import {AuthService} from '../../usuarios/auth.service'
 import { URL_BACKEND } from 'src/app/config/config';
+import { CarritoService } from 'src/app/compras/carrito.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { URL_BACKEND } from 'src/app/config/config';
 export class DetalleComponent implements OnInit {
 
   @Input() producto: Producto
+  productos: Producto[]
 
   titulo: string = "Detalle del producto"
   public fotoSeleccionada: File
@@ -24,11 +26,24 @@ export class DetalleComponent implements OnInit {
 
   constructor(private productoService: ProductoService,
     public modalService: ModalService,
-    public authService: AuthService) { }
+    public authService: AuthService,
+    private carritoService: CarritoService) { }
 
   ngOnInit(): void {
+    if(this.producto){
+      console.log('detalle.component: ',this.producto.categoria.nombre)
+    this.productoService.getProductosPorCategoria(this.producto.categoria.nombre).subscribe(
+      productos => {
+        this.productos = productos;
+        console.log(`detalle.component: `,this.productos);
+      }
+    )
+    }else{
+      console.log('no existe producto')
+    }
 
   }
+
   seleccionarFoto(event){
     this.fotoSeleccionada = event.target.files[0]
     this.progreso = 0
@@ -51,9 +66,7 @@ export class DetalleComponent implements OnInit {
         }else if(event.type === HttpEventType.Response){
           let response: any = event.body
           this.producto = response.producto as Producto
-
           console.log(response.producto)
-
           this.modalService.notificarUpload.emit(this.producto);
           swal.fire(
             'La foto se ha subido completamente',
@@ -65,6 +78,10 @@ export class DetalleComponent implements OnInit {
     }
 
 
+  }
+
+  goToCar(producto: Producto){
+    this.carritoService.addToList(producto)
   }
 
   cerrarModal(){

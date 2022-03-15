@@ -1,12 +1,12 @@
+<app-header></app-header>
 
-<app-header  ></app-header>
+<div style="min-height: calc(100vh-56px);">
+  <app-slider ></app-slider>
 
-<app-slider ></app-slider>
 
-
-  <div class="container my-2 text-left">
-    <button *ngIf="authService.hasrole('ROLE_ADMIN')" type="button" [routerLink]="['/productos/form']" name="button" class="btn btn-danger mx-2 btn-social">Crear Producto</button>
-    <button *ngIf="authService.hasrole('ROLE_ADMIN')" type="button" [routerLink]="['/categorias/form']" name="button" class="btn btn-info mx-2 btn-social">Crear Categoria</button>
+  <div class="container my-2 text-left" *ngIf="authService.hasrole('ROLE_ADMIN')">
+    <button class="btn btn-success" routerLink="/productos/save">vender</button>
+    <button  type="button" [routerLink]="['/categorias/form']" name="button" class="btn btn-info mx-2 btn-social">Crear Categoria</button>
   </div>
 
 
@@ -19,12 +19,12 @@
       <div class="col p-0 mt-3">
         <div class="product-title">
           <div class="d-flex align-items-center">
-            <span class="heading">Todos nuestros productos al mejor precio</span>
+            <h2 class="heading" >Todos nuestros productos al mejor precio</h2>
           </div>
         </div>
       </div>
     </main>
-    <main class="container">
+    <main class="container" *ngIf="productos?.length>0">
       <div class="col">
         <app-listar-producto [productos]="productos"></app-listar-producto>
       </div>
@@ -36,17 +36,19 @@
       <div class="col p-0 mt-3">
         <div class="product-title">
           <div class="d-flex align-items-center">
-            <span class="heading">Todos nuestros productos para bebes y niños</span>
+            <!--<h2 class="heading" >Todos nuestros productos para bebes y niños</h2>-->
           </div>
         </div>
       </div>
     </main>
     <main class="container">
       <div class="col">
-        <app-listar-producto [productos]="productosBebes"></app-listar-producto>
+        <!--<app-listar-producto [productos]="productosBebes"></app-listar-producto>-->
       </div>
     </main>
   </section>
 
+
+</div>
 
 <app-footer></app-footer>

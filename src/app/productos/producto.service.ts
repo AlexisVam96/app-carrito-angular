@@ -97,6 +97,18 @@ export class ProductoService {
     )
   }
 
+  saveProductAndFile(archivo: File, producto: Producto): Observable<HttpEvent<{}>>{
+    let formData = new FormData()
+    formData.append("archivo", archivo)
+    formData.append("producto", JSON.stringify(producto))
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/file`, formData, {
+      reportProgress: true
+    })
+
+    return this.http.request(req)
+  }
+
   subirFoto(archivo: File, id: any): Observable<HttpEvent<{}>>{
 
     let formData = new FormData()

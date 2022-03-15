@@ -1,0 +1,104 @@
+
+<app-header></app-header>
+
+<section class="container mb-3 mt-5">
+  <ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+      {{ err }}
+    </li>
+  </ul>
+
+  <div class="card col-lg-10 col-md-10 mt-4 p-3 " style="margin:auto" >
+    <h3 class="h5">Publica tu producto</h3>
+    <div class="dropdown-divider"></div>
+    <form #registroForm="ngForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group-row">
+            <label for="nombre" class="col-form-label col-sm ">Nombre</label>
+            <div class="col-sm">
+              <input type="text" class="input" [(ngModel)]="producto.nombre" name="nombre" required #nombre="ngModel" maxlength="50">
+              <div class="text-danger label-danger" style="font-size: small;" *ngIf="nombre.invalid && nombre.touched ">
+                *El campo nombre es obligatorio
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm">
+            <label for="" class="col-form-label ">Imagen</label>
+            <div class="custom" style="background: none;" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+              <ngx-dropzone-label>Subir o arrastrar imagen!</ngx-dropzone-label>
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"  [file]="f" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-image-preview>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group-row">
+            <label for="descripcion" class="col-form-label col-sm">Descripción</label>
+            <div class="col-sm">
+              <textarea name="descripcion"  class="input" [(ngModel)]="producto.descripcion" cols="100" required #descripcion="ngModel" maxlength="250"></textarea>
+              <div class="text-danger label-danger" style="font-size: small;" *ngIf="descripcion.invalid && descripcion.touched ">
+                *El campo descripcion es obligatorio
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group-row">
+            <label for="categoria" class="col-form-label col-sm">Categoria</label>
+            <div class="col-sm">
+              <select [compareWith]="comprararCategoria" name="categoria" class="input"  [(ngModel)]="producto.categoria" required #categoria="ngModel">
+                <option [ngValue]="undefined" >--Seleccionar una categoria--</option>
+                <option *ngFor="let categoria of categorias" [ngValue]="categoria">{{categoria.nombre}}</option>
+              </select>
+              <div class="text-danger label-danger" style="font-size: small;" *ngIf="categoria.invalid && categoria.touched ">
+                *El campo categoria es obligatorio
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col pr-0">
+              <div class="form-group-row">
+                <label for="precio" class="col-form-label col-sm">Precio</label>
+                <div class="col-sm">
+                  <input type="number" class="input" [(ngModel)]="producto.precio" name="precio" required #precio="ngModel">
+                  <div class="text-danger label-danger" style="font-size: small;" *ngIf="precio.invalid && precio.touched ">
+                    *El campo precio es obligatorio
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col pl-0">
+              <div class="form-group-row">
+                <label for="stock" class="col-form-label col-sm">Stock</label>
+                <div class="col-sm">
+                  <input type="number" class="input" [(ngModel)]="producto.stock" name="stock" required #stock="ngModel">
+                  <div class="text-danger label-danger" style="font-size: small;" *ngIf="stock.invalid && stock.touched ">
+                    *El campo stock es obligatorio
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+          <div class="frow mt-3"  >
+            <div class="col-sm d-flex justify-content-end">
+              <button class="btn btn-success" [disabled]="registroForm.form.invalid" role="button" (click)="create()" *ngIf="!producto.id else elseBlock">Publicar</button>
+              <ng-template #elseBlock>
+                <button class="btn btn-success " role="button" (click)="update()">Editar</button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</section>

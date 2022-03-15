@@ -1,10 +1,13 @@
 .btn-cantidad{
   border-radius: 50%!important;
   border-color: #d9d9d9;
+  font-size: .725rem!important;
+  background: #d8d8d8;
 }
 
 .btn-cantidad:hover{
-  background-color: rgba(0, 0, 0, .08);
+  background: #fff;
+  color: black;
 }
 
 

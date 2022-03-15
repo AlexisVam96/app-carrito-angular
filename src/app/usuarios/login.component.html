@@ -1,11 +1,11 @@
-<div mat-dialog-content class="login-modal" >
+<div mat-dialog-content class="login-modal " >
   <div class="row">
     <div class="col-10">
-      <h5 class="text-card" >{{titulo}}</h5>
+      <h2 class="text-card h6" >{{titulo}}</h2>
     </div>
     <div class="col-2">
       <a (click)="cerrarModal()" type="button" class="close" >
-        <span aria-hidden="true">&times;</span>
+        <span style="color: #fff;" aria-hidden="true">&times;</span>
       </a>
     </div>
   </div>
@@ -22,11 +22,11 @@
 
 
    <div class="mt-4">
-      <input class="input mb-3" style="border-radius: 20px; font-size: medium; padding: 0 15px;" type="text" [(ngModel)]="usuario.email"  placeholder="email" name="email">
-      <input class="input " style="border-radius: 20px; font-size: medium; padding: 0 15px;" type="password"   [(ngModel)]="usuario.password"  name="password" placeholder="Password">
+      <input class="input mb-3"  type="text" [(ngModel)]="usuario.email"  placeholder="email" name="email">
+      <input class="input "  type="password"   [(ngModel)]="usuario.password"  name="password" placeholder="Password">
 
      <div class="form-group mt-4" style="text-align: end;">
-       <button class="btn btn-light btn-block" style="border-color: #d9d9d9;" type="button" (click)="login()">Iniciar sesión</button>
+       <button class="btn btn-success btn-block" style="border-color: #d9d9d9;" type="button" (click)="login()">Iniciar sesión</button>
      </div>
     </div>
 </div>

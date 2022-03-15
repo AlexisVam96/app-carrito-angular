@@ -24,3 +24,9 @@
 @keyframes fadeIn{0% {opacity: 0} to {opacity: 1}}
 
 @-webkit-keyframes fadeIn{0% {opacity: 0} to {opacity: 1}}
+
+.display-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

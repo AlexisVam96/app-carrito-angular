@@ -12,7 +12,7 @@
       {{carritoService.getCantidadItem(producto.id)}}
     </div>
     <div class="col-4 display-center">
-      <button (click)="carritoService.incrementaCantidad(producto.id)"  class="btn btn-border btn-cantidad " type="button" >
+      <button [disabled]="carritoService.getCantidadItem(producto.id)>producto.stock-1" (click)="carritoService.incrementaCantidad(producto.id)"  class="btn btn-border btn-cantidad " type="button" >
         <span class="fas fa-plus"></span>
       </button>
     </div>

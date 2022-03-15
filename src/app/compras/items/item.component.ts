@@ -3,6 +3,7 @@ import { ItemService} from './item.service'
 import {Compra} from '../models/compra'
 import { ActivatedRoute} from '@angular/router'
 import { ComprasService} from '../services/compras.service'
+import { CarritoService } from '../carrito.service';
 
 @Component({
   selector: 'app-item',
@@ -15,7 +16,8 @@ export class ItemComponent implements OnInit {
 
   constructor(public itemService: ItemService,
     private activatedRoute: ActivatedRoute,
-    private comprasService: ComprasService) { }
+    private comprasService: ComprasService,
+    private carritoService: CarritoService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params =>{
@@ -29,4 +31,11 @@ export class ItemComponent implements OnInit {
     })
   }
 
+  public get total(): number{
+    let total = 0;
+    this.compra.items.forEach(items =>{
+      total+=items.importe
+    })
+    return total
+  }
 }

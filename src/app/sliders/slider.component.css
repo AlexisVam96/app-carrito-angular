@@ -1,0 +1,17 @@
+.objetfit > img{
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+	background-color: rgba(0, 0, 0, 0.788);
+
+}
+
+@media only screen and (max-width: 600px) {
+  .objetfit > img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.788);
+
+  }
+}

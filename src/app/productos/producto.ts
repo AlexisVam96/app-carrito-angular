@@ -1,5 +1,6 @@
 
 import {Categoria} from '../categoria/categoria'
+import { Usuario } from '../usuarios/usuario';
 
 export class Producto {
   id: number;
@@ -9,7 +10,8 @@ export class Producto {
   precio: number;
   stock: number;
   categoria: Categoria;
+  usuario: Usuario;
 
-  
+
 
 }

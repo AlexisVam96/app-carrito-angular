@@ -1,29 +1,43 @@
 <app-header  ></app-header>
 
-<div class="card container col-lg-8 col-md-10  mt-4" style=" margin: auto;" *ngIf="compra">
-  <div class="card-body" >
+<section class="container mt-4">
+    <div class="col-sm-8">
+      <div class="card card-body" *ngIf="compra">
 
-  <table class="table table-responsive">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">producto</th>
-        <th scope="col">precio</th>
-        <th scope="col">cantidad</th>
-        <th scope="col">importe</th>
-      </tr>
-    </thead>
-    <tbody >
-      <tr *ngFor="let itemm of compra.items">
-        <th scope="row">{{itemm.id}}</th>
-        <td>
-          <img src="http://localhost:8084/api/uploads/img/{{itemm.producto.imagen}}" width="70" height="70" class="img-fluid" alt="">
-          {{itemm.producto.nombre}}</td>
-        <td>S/{{itemm.producto.precio}}.00</td>
-        <td>{{itemm.cantidad}}</td>
-        <td>S/{{itemm.importe}}.00</td>
-      </tr>
-    </tbody>
-  </table>
+
+        <table class="table  text-white">
+          <thead>
+            <tr>
+              <th >#</th>
+              <th >producto</th>
+              <th>precio</th>
+              <th >cantidad</th>
+              <th >importe</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let itemm of compra.items">
+              <th >{{itemm.id}}</th>
+              <td>
+                <img src="http://localhost:8084/api/uploads/img/{{itemm.producto.imagen}}" width="70" height="70" class="img-fluid" alt="">
+                {{itemm.producto.nombre}}</td>
+              <td>S/{{itemm.producto.precio}}.00</td>
+              <td>{{itemm.cantidad}}</td>
+              <td>S/{{itemm.importe}}.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class=" d-flex justify-content-end mr-2">
+          <span class="btn-success btn">TOTAL: {{total |currency: 'S/'}}</span>
+        </div>
+
+
+
+    </div>
+
   </div>
-</div>
+
+</section>
+
+

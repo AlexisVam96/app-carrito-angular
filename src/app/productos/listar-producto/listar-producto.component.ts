@@ -4,6 +4,8 @@ import SwiperCore, { Navigation,Pagination, Scrollbar, A11y } from 'swiper/core'
 import { ModalService } from '../detalle/modal.service';
 import { Producto } from '../producto';
 import {URL_BACKEND} from '../../config/config'
+import { ProductoService } from '../producto.service';
+import swal from 'sweetalert2'
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
@@ -23,6 +25,7 @@ export class ListarProductoComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private productoService: ProductoService,
     private modalService: ModalService
   ) { }
 
@@ -30,7 +33,9 @@ export class ListarProductoComponent implements OnInit {
   }
 
   swiperConfig: any = {
-    navigation: true,
+    pagination: {
+      clickable: true
+    },
     breakpoints: {
       1500: {
         slidesPerView: 4,
@@ -62,6 +67,40 @@ export class ListarProductoComponent implements OnInit {
   abrirModal(producto: Producto){
     this.productoSeleccionado = producto;
     this.modalService.abrirModal()
+  }
+
+  delete(producto: Producto): void{
+    const swalWithBootstrapButtons = swal.mixin({
+      customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Esta seguro?',
+      text: `¿Seguro que desea eliminar el producto ${producto.nombre} - ${producto.descripcion}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.productoService.delete(producto.id).subscribe(
+          _response => {
+            this.productos = this.productos.filter(pro => pro !== producto)
+            swalWithBootstrapButtons.fire(
+              'Producto Eliminado!',
+              `Producto ${producto.nombre} elimando con éxito!`,
+              'success'
+            )
+          }
+        )
+      }
+    })
   }
 
 }

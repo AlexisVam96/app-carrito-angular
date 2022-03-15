@@ -23,8 +23,8 @@
             <div class="row" >
               <div class="col-3 p-0 d-flex justify-content-center">
                 <div class="d-flex justify-content-center align-items-center" style="height: 60px; width: 60px;">
-                  <img class="img-fluid" *ngIf="item.producto?.imagen" src="{{item.producto.imagen}}" >
-                  <img class="img-fluid" *ngIf="!item.producto?.imagen" src="{{urlBackend}}/images/not-image-cuadrado.png">
+                  <img class="img-fluid" *ngIf="item.producto?.imagen" src="{{urlBackend}}/api/uploads/img/{{item.producto.imagen}}" >
+                  <img class="img-fluid" *ngIf="!item.producto?.imagen" src="{{urlBackend}}/api/images/not-image-cuadrado.png">
                 </div>
               </div>
               <div class="col-9">
@@ -45,7 +45,7 @@
             Subtotal
           </div>
           <div class="col-6 text-right">
-            {{getSubtotal() | currency : 'S/'}}
+            {{this.subtotal | currency : 'S/'}}
           </div>
         </div>
         <div class="row mt-3" style="font-size: 1rem; font-weight: 500;  padding-bottom: 14px;">
@@ -53,7 +53,7 @@
             Total a pagar
           </div>
           <div class="col-6 text-right">
-            {{getSubtotal() | currency : 'S/'}}
+            {{this.subtotal | currency : 'S/'}}
           </div>
         </div>
       </div>
@@ -75,6 +75,7 @@
   <section class="container p-0" >
     <main class="col ">
       <form class="g-3 " #facturaForm="ngForm">
+      <!--<form class="g-3 " #facturaForm="ngForm" > [formGroup]="stripeTest"-->
         <div class="row mt-3">
           <div class="col-lg-8 col-md-12">
             <div class="card mb-3"  *ngIf="!authService.isAuthenticated()" >
@@ -106,14 +107,14 @@
                   </div>
                   <div class="col-md-3 mt-2">
                     <label for="dni" class="form-label">DNI</label>
-                    <input type="text" class="input" name="dni" [(ngModel)]="compra.dni" required #dni="ngModel">
-                    <div class="text-danger label-dangxer" *ngIf="dni.invalid && dni.touched ">
+                    <input maxlength="8" type="text" class="input" name="dni" [(ngModel)]="compra.dni" required #dni="ngModel">
+                    <div class="text-danger label-danger" *ngIf="dni.invalid && dni.touched ">
                       Ingresa tu documento
                     </div>
                   </div>
                   <div class="col-md-3 mt-2">
                     <label for="movil" class="form-label">Celular</label>
-                    <input type="text" class="input" name="movil" [(ngModel)]="compra.movil" required #movil="ngModel">
+                    <input maxlength="9" type="text" class="input" name="movil" [(ngModel)]="compra.movil" required #movil="ngModel">
                     <div class="text-danger label-danger" *ngIf="movil.invalid && movil.touched ">
                       Ingresa tu celular
                     </div>
@@ -164,9 +165,9 @@
                     <input type="radio" name="check" (click)="openCheck()">
                     <span class="mx-2" >Pagar en efectivo contraentrega</span>
                   </div>
-                  <div class="mx-3" >
+                  <div class="mx-3" *ngIf="check">
                     <div style="font-size: small;">Ingrese un monto mayor a su pedido</div>
-                    <input name="monto" [(ngModel)]="compra.monto" required type="text" class="input" style="width: 200px;" >
+                    <input name="monto" [(ngModel)]="compra.monto"  type="text" class="input" style="width: 200px;" >
                   </div>
               </div>
               <div class="border-pay mt-3">
@@ -174,7 +175,13 @@
                   <input type="radio" name="check" (click)="openCheckPaypal()" >
                   <span class="mx-2" >Pagar con tarjeta</span>
                 </div>
-                <div class=" mx-3" *ngIf="checkPaypal">
+                <div class=" mx-3" *ngIf="checkPaypal" [formGroup]="stripeTest">
+
+                    <input class="input" type="text" formControlName="name"  placeholder="Nombre del propietario de la tarjeta..">
+                    <ngx-stripe-card
+                      [options]="options"
+                      [elementsOptions]="elementsOptions"
+                    ></ngx-stripe-card>
 
                 </div>
             </div>
@@ -190,11 +197,11 @@
                 <div>DNI: {{compra.dni}}</div>
                 <div>Celular: {{compra.movil}}</div>
                 <div>Ubicación: {{compra.direccion}}</div>
-                <div>Monto para cancelar:{{compra.monto}}</div>
+
                 <div class="dropdown-divider"></div>
                 <div class="row">
                   <div class="col-md-5 offset-md-7">
-                    <button class="btn btn-block btn-success " type="button" (click)="create()" [disabled]="facturaForm.form.invalid || !(carritoService.items.length>0)">Finalizar Compra</button>
+                    <button class="btn btn-block btn-success "  [disabled]="facturaForm.form.invalid || !(carritoService.items.length>0)" (click)="createToken()">Finalizar Compra</button>
                   </div>
               </div>
               </div>
@@ -222,18 +229,18 @@
                         <div class="col-8" >
                           <div class="row" >
                             <div class="col-3 px-2 d-flex justify-content-center align-items-center" style="height: 70px; width: 70px;">
-                              <img class="img-fluid" *ngIf="item.producto?.imagen" src="{{item.producto.imagen}}" >
+                              <img class="img-fluid" *ngIf="item.producto?.imagen" src="{{urlBackend}}/api/uploads/img/{{item.producto.imagen}}" >
                               <img class="img-fluid" *ngIf="!item.producto?.imagen" src="{{urlBackend}}/images/not-image-cuadrado.png" >
                             </div>
                             <div class="col-9 px-2">
-                              <p class="mb-1">{{item.producto.nombre}}</p>
-                              <span class="text-muted" style="font-size: x-small; font-weight: 500;">{{item.producto.descripcion}}</span>
+                              <p class="mb-1">{{item.producto.nombre.toUpperCase()}}</p>
+                              <span class="text-muted" style="font-size: x-small; font-weight: 500;">{{item.producto.descripcion.toUpperCase()}}</span>
                               <p class="text-left text-muted" style="font-weight: 500;">CANTIDAD: {{item.cantidad}}</p>
                             </div>
                           </div>
                         </div>
                         <div class="col-4 px-2  text-right">
-                        <span class="label " style="color: #737373;">{{item.cantidad*item.producto.precio | currency : 'S/'}}</span>
+                        <span class="label " style="color: #737373;">{{item.cantidad*item.producto.precio | currency: 'S/' }}</span>
                         </div>
                       </div>
                     </div>
@@ -244,7 +251,7 @@
                         <p class="mb-2">Subtotal:</p>
                       </div>
                       <div class="col-sm">
-                        <p class="mb-2" class="text-right">{{getSubtotal() | currency : 'S/'}}</p>
+                        <p class="mb-2" class="text-right">{{this.subtotal | currency: 'S/' }}</p>
                       </div>
                     </div>
                   </div>

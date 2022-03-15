@@ -9,9 +9,16 @@ import { NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 export class SliderComponent implements OnInit {
 
   sliders: any[] = [
-    { img: 'https://images.ctfassets.net/dfhnfm93fvnr/AyJIMCUgxgrmcSG6c47dY/b9300015e9a48edf2dc0282890c783c0/BIG-BANNER_2400X582_.jpg?q=75&w=1920'
+    { img: '/assets/img/dota-banner.png'
     },
-    { img: 'https://images.ctfassets.net/dfhnfm93fvnr/4EHXjNZKn3Nfwt3ZwUdCrJ/64130e06856011ae899279db288c22fe/Banner_Desktop.jpg?q=75&w=1920'
+    {
+      img: '/assets/img/lol-banner.png'
+    },
+    {
+      img: '/assets/img/csgo-banner.png'
+    },
+    {
+      img: '/assets/img/fortnite-banner.png'
     }
   ]
 
@@ -26,8 +33,8 @@ export class SliderComponent implements OnInit {
 
 
   constructor(public ngbCarouselConfig: NgbCarouselConfig) {
-    ngbCarouselConfig.interval = 5000;
-    ngbCarouselConfig.pauseOnHover = true;
+    ngbCarouselConfig.interval = 3000;
+    ngbCarouselConfig.pauseOnHover = false;
   }
 
   ngOnInit(): void {

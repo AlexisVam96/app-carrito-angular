@@ -41,6 +41,11 @@ export class LoginComponent implements OnInit {
 
   }
 
+  registro(){
+    this.dialogRef.close();
+    this.router.navigate(['/registro'])
+  }
+
 
   login(): void{
     console.log(this.usuario);

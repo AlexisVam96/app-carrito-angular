@@ -1,110 +1,177 @@
 
+<main style="height: 80px;">
+
+  <header class="header" [ngClass]="{'scroll-header' : true}" style="border-bottom: 1px solid #f3f3f3;">
+
+    <!--<div class="banner scroll-header" style=" text-align: center; padding: 2px;font-size: 0.9rem; font-weight: 400;background: #fff;
+   color: gray;
+  ">
+  <i class="fas fa-phone-alt"></i> 901552856 | You Store
+    </div>-->
 
 
-<div style=" text-align: center; padding: 2px;font-size: 0.9rem; font-weight: 400;background-color: #f3f3f3;
- color: gray;
-">
-<i class="fas fa-phone-alt"></i> 901552856 | You Store
-  </div>
+    <nav class="main-header  p-0 bg-white  d-flex d-lg-none" style="top:0; position: sticky; z-index: 3; width: 100%; box-shadow: 0px 3px 3px rgba(0,0,0,0.2);">
+      <div class="px-1 w-100 d-block" style="position: relative;">
 
-
-  <nav class="main-header  p-0 bg-white  d-flex d-lg-none" style="top:0; position: sticky; z-index: 3; width: 100%; box-shadow: 0px 3px 3px rgba(0,0,0,0.2);">
-    <div class="px-1 w-100 d-block" style="position: relative;">
-
-      <div class="row">
-        <div class="col d-flex align-items-center">
-          <div class="main-header-option main-header-category">
-            <app-main-nav ></app-main-nav>
+        <div class="row">
+          <div class="col d-flex align-items-center">
+            <div class="main-header-option main-header-category">
+              <app-main-nav ></app-main-nav>
+            </div>
+            <div class="main-header-option main-header-user">
+              <span *ngIf="!authService.isAuthenticated()"
+              (click)="abrirModalLogin()"    ><i class="far fa-user"></i></span>
+            </div>
           </div>
-          <div class="main-header-option main-header-user">
-            <span *ngIf="!authService.isAuthenticated()"
-            (click)="abrirModalLogin()"    ><i class="far fa-user"></i></span>
+          <div class="col main-header-logo ">
+            <a class="navbar-brand text-muted d-flex align-items-center justify-content-center" style=" font-weight: bolder; font-size: medium;" routerLink="/productos">
+              <img src="../../favicon.ico" alt="favicon" width="30" height="30"> {{titulo}}</a>
           </div>
-        </div>
-        <div class="col main-header-logo ">
-          <a class="navbar-brand text-muted d-flex align-items-center justify-content-center" style=" font-weight: bolder; font-size: medium;" routerLink="/productos">
-            <img src="../../favicon.ico" alt="favicon" width="30" height="30"> {{titulo}}</a>
-        </div>
-        <div class="col d-flex align-items-center justify-content-end" >
-          <div class="main-header-option main-header-search">
-            <app-search-nav></app-search-nav>
+          <div class="col d-flex align-items-center justify-content-end" >
+            <div class="main-header-option main-header-search">
+              <app-search-nav></app-search-nav>
 
-          </div>
-          <div  class="main-header-option main-header-cart ml-1" *ngIf="car">
-            <span  routerLink="/carrito" >
-              <mat-icon matBadge="{{carritoService.cantidad}}" matBadgeColor="warn">shopping_cart</mat-icon>
-            </span>
+            </div>
+            <div  class="main-header-option main-header-cart ml-1" *ngIf="car">
+              <span  routerLink="/carrito" >
+                <mat-icon matBadge="{{carritoService.cantidad}}" matBadgeColor="warn">shopping_cart</mat-icon>
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
+    </nav>
+
+    <nav class="   main-header-lg d-none d-lg-block" style="position: stic; z-index: 3;">
+      <div class="container d-block">
+        <div class="row ">
+          <div class="col d-flex">
+            <div class="row">
+              <div class="col">
+                <a class="navbar-brand text-muted d-flex align-items-center" style=" font-weight: bolder; font-size: x-large;" routerLink="/productos">
+                  <img class="img-fluid" src="../../favicon.ico" alt="favicon" width="30" height="30" > {{titulo}}</a>
+              </div>
+              <div class="col d-flex align-items-center">
+                <a class="nav-link "  (click)="openDialogMaps()"><i class="fas fa-map-marker-alt"></i> Ingrese tu dirección</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <app-search-product></app-search-product>
+          </div>
+          <div class="col d-flex justify-content-end">
+            <div class="row">
+              <div class="col p-0" >
+                <a class=" nav-link d-flex align-items-center"   routerLink="/carrito">
+                  <mat-icon matBadge="{{carritoService.cantidad}}" matBadgeColor="warn" >shopping_cart</mat-icon>
+                  <span class="pl-3">Mi Carrito</span>
+                </a>
+              </div>
+              <div class="col p-0 d-flex align-items-center">
+                <a (click)="abrirModalLogin()" class="nav-link"><i class="far fa-user"></i> Iniciar sesión</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      </nav>
+
+  </header>
+
+
+
+
+
+    <!--
+    <div class="container">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item px-2  " routerLinkActive="active" >
+            <a class="navbar-brand text-muted d-flex align-items-center " style=" font-weight: bolder; font-size: x-large;" routerLink="/productos">
+              <img src="../../favicon.ico" alt="favicon" width="30" height="30"> {{titulo}}</a>
+          </li>
+
+
+            <li class="nav-item px-2 " routerLinkActive="active" *ngIf="!carritoService.existeDireccion(); else noDireccion" >
+            <a class="nav-link "  (click)="openDialogMaps()"><i class="fas fa-map-marker-alt"></i> Ingrese tu dirección</a>
+          </li>
+          <ng-template  #noDireccion >
+            <li class="nav-item px-2 " routerLinkActive="active" >
+              <a class="nav-link "  (click)="openDialogMaps()"><i class="fas fa-map-marker-alt"></i> {{carritoService.ubicacion}}</a>
+            </li>
+          </ng-template>
+          -
+
+
+
+            <li class="nav-item  px-2" routerLinkActive="active" *ngIf="authService.hasrole('ROLE_ADMIN')">
+            <a class="nav-link "   routerLink="/compras">Compras</a>
+          </li>
+
+
+        </ul>
+        <ul class="navbar-nav mr-auto example-form d-none d-lg-block auto-md px-2 " style="width: 500px;" >
+          <app-search-product></app-search-product>
+        </ul>
+
+        <ul class="navbar-nav navbar-right " >
+
+          <li class="nav-item px-2" *ngIf="authService.isAuthenticated()">
+            <button class="btn-vender" routerLink="/productos/save">vender</button>
+          </li>
+          <li class="nav-item  px-2" *ngIf="car">
+            <a class=" nav-link d-flex align-items-center"   routerLink="/carrito">
+              <mat-icon matBadge="{{carritoService.cantidad}}" matBadgeColor="warn" >shopping_cart</mat-icon>
+              <span class="pl-3">Mi Carrito</span>
+            </a>
+          </li>
+          <li class="nav-item " *ngIf="!authService.isAuthenticated()">
+            <a (click)="abrirModalLogin()" class="nav-link"><i class="far fa-user"></i> Iniciar sesión</a>
+          </li>
+          <li *ngIf="authService.isAuthenticated()" class="dropdown nav-item">
+            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{authService.usuario.nombre}} {{authService.usuario.apellido}}
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right" style="z-index: 2;" aria-labelledby="dropdownMenuLink">
+              <button data-toggle="collapse" *ngIf="authService.hasrole('ROLE_USER')" data-target="#navbarSupportedContent"  [routerLink]="['/mis-compras',authService.usuario.username]" class="dropdown-item" type="submit">
+                <i class="fas fa-shopping-bag"></i>&nbsp;  Mis compras
+              </button>
+              <div class="dropdown-divider"></div>
+              <button data-toggle="collapse" *ngIf="authService.hasrole('ROLE_USER')" data-target="#navbarSupportedContent"  [routerLink]="['/productos/usuario',authService.usuario.username]" class="dropdown-item" type="submit">
+                <i class="fas fa-shopping-bag"></i>&nbsp;  Mis productos
+              </button>
+              <div class="dropdown-divider" *ngIf="authService.hasrole('ROLE_ADMIN')"></div>
+              <button data-toggle="collapse" *ngIf="authService.hasrole('ROLE_ADMIN')" data-target="#navbarSupportedContent"  [routerLink]="['/compras']" class="dropdown-item" type="submit">
+                <i class="fas fa-shopping-bag"></i>&nbsp;  Ventas
+              </button>
+              <div class="dropdown-divider"></div>
+              <button data-toggle="collapse" data-target="#navbarSupportedContent"  (click)="logout()" class="dropdown-item" type="submit">
+                <i class="fas fa-sign-out-alt"></i>&nbsp;  Cerrar sesión
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+      </nav>
+  -->
+
+
+
+  <nav class="main-categories navbar navbar-expand-lg main-header-category d-none d-lg-block sticky-top " style="margin-top:27px" >
+    <div class="container">
+        <ul class="navbar-nav mr-auto mb-2 mb-lg-0 justify-content-center">
+          <li class="nav-item mx-1" *ngFor="let categoria of categorias" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/categoria',categoria.nombre]" >{{categoria.nombre.toUpperCase()}}</a>
+          </li>
+        </ul>
+      </div>
   </nav>
 
 
-
-<nav class="navbar navbar-expand  bg-white  sticky-top d-none d-lg-block" style="top:-1px; z-index: 3; border-bottom: #f3f3f3;">
-  <div class="container">
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav">
-        <li class="nav-item px-2  " routerLinkActive="active" >
-          <a class="navbar-brand text-success d-flex align-items-center " style=" font-weight: bolder; font-size: x-large;" routerLink="/productos">
-            <img src="../../favicon.ico" alt="favicon" width="30" height="30"> {{titulo}}</a>
-        </li>
-        <li class="nav-item px-2 " routerLinkActive="active" *ngIf="!carritoService.existeDireccion(); else noDireccion" >
-          <a class="nav-link "  (click)="openDialogMaps()"><i class="fas fa-map-marker-alt"></i> Ingrese tu dirección</a>
-        </li>
-        <ng-template  #noDireccion >
-          <li class="nav-item px-2 " routerLinkActive="active" >
-            <a class="nav-link "  (click)="openDialogMaps()"><i class="fas fa-map-marker-alt"></i> {{carritoService.ubicacion}}</a>
-          </li>
-        </ng-template>
-        <li class="nav-item  px-2" routerLinkActive="active" *ngIf="authService.hasrole('ROLE_ADMIN')">
-          <a class="nav-link "   routerLink="/compras">Compras</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav mr-auto example-form d-none d-lg-block auto-md px-2 " style="width: 500px;" >
-        <app-search-product></app-search-product>
-      </ul>
-
-      <ul class="navbar-nav navbar-right " >
-        <li class="nav-item  px-4" *ngIf="car">
-          <a class=" nav-link "   routerLink="/carrito">
-            <mat-icon matBadge="{{carritoService.cantidad}}" matBadgeColor="warn" >shopping_cart</mat-icon>
-          </a>
-      </li>
-        <li class="nav-item " *ngIf="!authService.isAuthenticated()">
-          <a (click)="abrirModalLogin()" class="nav-link"><i class="far fa-user"></i> Iniciar sesión</a>
-        </li>
-        <li *ngIf="authService.isAuthenticated()" class="dropdown nav-item">
-          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{authService.usuario.nombre}} {{authService.usuario.apellido}}
-          </a>
-
-          <div class="dropdown-menu dropdown-menu-right" style="z-index: 2;" aria-labelledby="dropdownMenuLink">
-            <button data-toggle="collapse" data-target="#navbarSupportedContent"  [routerLink]="['/mis-compras',authService.usuario.username]" class="dropdown-item" type="submit">
-              <i class="fas fa-shopping-bag"></i> Mis compras
-            </button>
-            <div class="dropdown-divider"></div>
-            <button data-toggle="collapse" data-target="#navbarSupportedContent"  (click)="logout()" class="dropdown-item" type="submit">
-              <i class="fas fa-sign-out-alt"></i> Cerrar sesión
-            </button>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-  </div>
-</nav>
-
-
-<nav class="navigation-header navbar navbar-expand-lg navbar-white bg-white d-none d-lg-block sticky-top" style=" z-index: 2; top: 63px; box-shadow: 0px 5px 5px rgba(0,0,0,0.2);">
-  <div class="container">
-      <ul class="navbar-nav mr-auto mb-2 mb-lg-0 justify-content-center">
-        <li class="nav-item mx-1" *ngFor="let categoria of categorias" routerLinkActive="active">
-          <a class="nav-link"  [routerLink]="['/categoria',categoria.nombre]" >{{categoria.nombre}}</a>
-        </li>
-      </ul>
-    </div>
-</nav>
+</main>
 

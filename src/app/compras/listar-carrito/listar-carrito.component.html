@@ -1,26 +1,26 @@
-<div class="row mb-3 text-car" *ngFor="let item of carritoService.items">
-  <div class="col-sm-4 col-12">
+<div class="row mb-0 text-car" *ngFor="let item of carritoService.items">
+  <div class="col-sm-5 col-12 ">
     <div class="row" [routerLink]="['/producto',item.producto.nombre]" style="cursor: pointer;">
-      <div class="col-4 px-2 d-flex">
+      <div class="col-3 px-2 d-flex">
         <div class="m-auto d-flex align-items-center justify-content-center" style="width: 72px; height: 72px;">
-          <img class="img-fluid" *ngIf="item.producto?.imagen" src="{{item.producto.imagen}}">
+          <img class="img-fluid" *ngIf="item.producto?.imagen" src="http://localhost:8084/api/uploads/img/{{item.producto.imagen}}">
           <img class="img-fluid" *ngIf="!item.producto?.imagen" src="{{urlBackend}}/images/not-image-cuadrado.png" >
         </div>
      </div>
-      <div class="col-8 px-2 d-block">
-        <p class="mb-1">{{item.producto.nombre}}</p>
-        <span class="text-muted" style="font-size: x-small; font-weight: 500;">{{item.producto.descripcion}}</span>
+      <div class="col-9 px-2 py-3">
+        <p class="text-car mb-0 ">{{item.producto.nombre}}</p>
+        <span class="text-description" style="font-size: .652rem;" >{{item.producto.descripcion}}</span>
       </div>
     </div>
 
   </div>
-  <div class="col-sm-2 col-6 px-2 display-center">
-    <span class="d-none d-md-block">{{item.producto.precio | currency : 'S/'}}</span>
+  <div class="col-sm-1 col-6 px-2 display-center text-car">
+    <span class="text-car d-none d-md-block">{{item.producto.precio | currency : 'S/'}}</span>
   </div>
   <div class="col-sm-2 col-6 px-2 display-center ">
     <app-button-item-cantidad [producto]="item.producto"></app-button-item-cantidad>
   </div>
-  <div class="col-sm-2 col-6 px-2 display-center">
+  <div class="col-sm-2 col-6 px-2 display-center text-price">
     <span>{{item.cantidad*item.producto.precio | currency : 'S/'}}</span>
   </div>
   <div class="col-sm-2 col-6 px-2 mb-2 display-center">

@@ -68,6 +68,7 @@ export class RegistroComponent implements OnInit {
 
 
   create(): void{
+    this.usuario.documento = this.usuario.password;
     this.authService.create(this.usuario)
     .subscribe(
       _usuario => {

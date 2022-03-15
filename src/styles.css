@@ -6,6 +6,10 @@
   z-index: 10!important;
   display: unset!important;
 }
+
+.mat-icon{
+  color: grey;
+}
 .mat-badge {
   margin-top: 7px;
 }
@@ -18,7 +22,8 @@
 body{
   margin: 0!important;
   padding: 0;
-  background-color: #f6f6f6!important;
+  background-color: #f2f2f2!important;
+  /*background-color: #1b2838!important;*/
   height: 100%;
 }
 
@@ -50,16 +55,18 @@ body{
   outline: none;
 }
 .input{
-  border: 1px solid #d9d9d9;
-  height: 40px;
+  border: 1px solid rgba(218, 218, 218, 0.973);
+  height: calc(1.5em + .75rem + 2px);
   width: 100%;
   border-radius: 4px;
-  padding: 11px 8px;
-  line-height: 18px;
+  padding: .375rem .75rem;
   box-sizing: border-box;
-  display: inline-flex;
-
-
+  display: block;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-clip: padding-box;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
 
 body::-webkit-scrollbar {
@@ -80,16 +87,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .btn{
   cursor: pointer!important;
-  border-radius: 999px!important;
+  border-radius: 25px!important;
   padding: 10px 15px!important;
   border: solid transparent;
   font-weight: 500!important;
-
 }
 
 .card{
   border:none!important;
-  border-radius: 10px!important;
+  border-radius: 5px!important;
 }
 
 .card-header{
@@ -99,10 +105,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .btn:disabled{
   background: #f2f2f2!important;
   color: #d9d9d9!important;
-  border-color: #f2f2f2!important;
   font-weight: 500!important;
   font-size: 1rem!important;
+  box-shadow: none;
+  cursor: not-allowed!important;
 }
+
+
 
 .btn-border{
   border: 1px solid #f2f2f2
@@ -111,9 +120,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .btn-success{
   background-color: #1b8f43!important;
   border-color: #1b8b29!important;
-
+  color: #fff !important;
+  border: none!important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-
+/*
+.btn-success:hover{
+  background-color: #13632e!important;
+  border-color: #13632e;
+}
+*/
 .mat-toolbar-row, .mat-toolbar-single-row {
    height: auto;
 }
@@ -129,3 +145,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-autocomplete-panel.mat-autocomplete-visible {
   overflow: hidden;
 }
+
+
